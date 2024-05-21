@@ -20,6 +20,10 @@ class TodoPage extends BasePage {
         let itemClass = await this.getClass(By.xpath(`//input[@name='li${item}']/following-sibling::span`))
         assert.equal(itemClass, "done-false");
     }
+    async checkItemIsCrossed(item) {
+        let itemClass = await this.getClass(By.xpath(`//input[@name='li${item}']/following-sibling::span`))
+        assert.equal(itemClass, "done-true");
+    }
     async markItem(item){
         await this.click(By.name("li" + item))
         await driver.sleep(1000);

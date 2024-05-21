@@ -15,12 +15,15 @@ describe("Todo Test", async function () {
         remaining--
         await TodoPage.checkItemIsNotCrossed(i)
         await TodoPage.markItem(i)
+        await TodoPage.checkItemIsCrossed(i)
     }
     await TodoPage.addTask("asd")
     total++
     remaining++
     await TodoPage.checkMainText(remaining,total)
+    await TodoPage.checkItemIsNotCrossed(total)
     await TodoPage.markItem(total)
+    await TodoPage.checkItemIsCrossed(total)
     remaining--
     await TodoPage.checkMainText(remaining,total)
   });
