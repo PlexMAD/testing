@@ -27,6 +27,27 @@ class BasePage {
         await driver.sleep(1000);
         await driver.quit()
     }
+    async isElementPresent(locator) {
+        try {
+           await driver.wait(until.elementIsVisible(driver.findElement(locator)), 10000);
+           return true;
+        } catch (error) {
+           return false;
+        }
+     }
+     async getTextFromElement(locator) {
+        await driver.wait(until.elementIsVisible(driver.findElement(locator)), 10000);
+        return await driver.findElement(locator).getText();
+     }
+  
+     async getTextFromMultipleElements(locator) {
+        const elements = await driver.findElements(locator);
+        const texts = [];
+        for (const element of elements) {
+           texts.push(await element.getText());
+        }
+        return texts;
+     }
 }
 
 module.exports = BasePage;
